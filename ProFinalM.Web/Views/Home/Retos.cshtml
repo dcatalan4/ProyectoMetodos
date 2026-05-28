@@ -1,0 +1,112 @@
+@model ChallengeViewModel
+
+@{
+    ViewData["Title"] = "Retos numericos";
+}
+
+<section class="challenge-hero">
+    <div class="challenge-copy">
+        <p class="eyebrow">Retos de Beto</p>
+        <h1>Demuestra cuanto aprendiste de metodos numericos</h1>
+        <p>
+            Ingresa un nombre respetuoso, responde el test y ayuda a Beto a desbloquear su tablero de aprendizaje.
+            Al terminar, tu punteo se guarda en un archivo de texto del proyecto.
+        </p>
+        <div class="player-panel">
+            <label for="playerName" class="form-label">Nombre de usuario</label>
+            <div class="player-row">
+                <input id="playerName" class="form-control" maxlength="24" placeholder="Ej. Beto_2026" autocomplete="off" />
+                <button id="startChallenge" class="btn btn-primary" type="button">Iniciar reto</button>
+            </div>
+            <p id="nameMessage" class="challenge-message" aria-live="polite"></p>
+        </div>
+    </div>
+    <div class="challenge-avatar">
+        <img src="~/img/beto-el-numerico.jpeg" alt="Beto preparado para resolver retos numericos" />
+    </div>
+</section>
+
+<section class="challenge-section">
+    @Html.AntiForgeryToken()
+    <div class="challenge-board">
+        <div class="challenge-status">
+            <div>
+                <span>Jugador</span>
+                <strong id="activePlayer">Sin iniciar</strong>
+            </div>
+            <div>
+                <span>Punteo</span>
+                <strong><span id="scoreValue">0</span>/<span id="totalValue">0</span></strong>
+            </div>
+            <div>
+                <span>Progreso</span>
+                <strong id="progressValue">0%</strong>
+            </div>
+        </div>
+
+        <div id="questionCard" class="question-card locked">
+            <p class="eyebrow">Pregunta</p>
+            <h2>Ingresa tu nombre para comenzar</h2>
+            <div id="answerOptions" class="answer-grid"></div>
+            <p id="answerFeedback" class="challenge-message" aria-live="polite"></p>
+        </div>
+
+        <div class="mini-game">
+            <div>
+                <p class="eyebrow">Mini juego</p>
+                <h2>Ayuda a Beto a cruzar el camino correcto</h2>
+                <p>Por cada respuesta correcta, Beto avanza una casilla hacia la meta.</p>
+            </div>
+            <div class="track" aria-label="Progreso del juego">
+                <div id="betoToken" class="beto-token">B</div>
+                <span>Inicio</span>
+                <span>Meta</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="challenge-section">
+    <div class="section-heading">
+        <p class="eyebrow">Ranking</p>
+        <h2>Mejores punteos guardados</h2>
+        <p>Estos resultados se leen desde `App_Data/scores.txt`.</p>
+    </div>
+
+    <div class="scoreboard-wrap">
+        <table class="table app-table scoreboard-table">
+            <thead>
+                <tr>
+                    <th>Jugador</th>
+                    <th>Punteo</th>
+                    <th>Reto</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody id="scoreRows">
+                @if (Model.Scores.Count == 0)
+                {
+                    <tr>
+                        <td colspan="4">Todavia no hay punteos guardados.</td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var score in Model.Scores)
+                    {
+                        <tr>
+                            <td>@score.UserName</td>
+                            <td>@score.Score/@score.Total</td>
+                            <td>@score.Challenge</td>
+                            <td>@score.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/challenges.js" asp-append-version="true"></script>
+}

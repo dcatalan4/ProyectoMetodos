@@ -23,3 +23,6 @@ Desktop.ini
 # Local environment
 .env
 .env.*
+
+# Local challenge scores
+ProFinalM.Web/App_Data/scores.txt

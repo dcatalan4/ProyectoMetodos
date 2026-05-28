@@ -8,6 +8,12 @@ namespace ProFinalM.Web.Controllers;
 public class HomeController : Controller
 {
     private readonly NumericMethodService _numericMethodService = new();
+    private readonly ChallengeScoreService _challengeScoreService;
+
+    public HomeController(ChallengeScoreService challengeScoreService)
+    {
+        _challengeScoreService = challengeScoreService;
+    }
 
     public IActionResult Index()
     {
@@ -20,6 +26,34 @@ public class HomeController : Controller
     public IActionResult Historia()
     {
         return View();
+    }
+
+    public IActionResult Retos()
+    {
+        return View(new ChallengeViewModel
+        {
+            Scores = _challengeScoreService.GetTopScores().ToList()
+        });
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult SaveScore([FromBody] SaveScoreRequest request)
+    {
+        try
+        {
+            _challengeScoreService.Save(request);
+            return Json(new
+            {
+                ok = true,
+                scores = _challengeScoreService.GetTopScores()
+            });
+        }
+        catch (Exception ex)
+        {
+            Response.StatusCode = StatusCodes.Status400BadRequest;
+            return Json(new { ok = false, message = ex.Message });
+        }
     }
 
     [HttpPost]
