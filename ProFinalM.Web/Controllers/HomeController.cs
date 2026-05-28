@@ -17,6 +17,11 @@ public class HomeController : Controller
         return View(model);
     }
 
+    public IActionResult Historia()
+    {
+        return View();
+    }
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult Index(NumericMethodsViewModel model, string method)

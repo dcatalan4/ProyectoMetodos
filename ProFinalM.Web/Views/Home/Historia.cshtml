@@ -1,0 +1,105 @@
+@{
+    ViewData["Title"] = "Historia de Beto";
+}
+
+<section class="story-hero">
+    <div class="story-copy">
+        <p class="eyebrow">La historia de Beto</p>
+        <h1>Un estudiante curioso que quiere entender los metodos numericos</h1>
+        <p>
+            Beto es estudiante de bachillerato. Le gustan las computadoras, las matematicas y las ideas que
+            parecen dificiles al inicio, pero que se vuelven claras cuando alguien las explica con paciencia.
+        </p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" asp-action="Index" asp-fragment="taylor">Aprender Taylor</a>
+            <a class="btn btn-outline-dark" asp-action="Index" asp-fragment="minimos">Ver Minimos Cuadrados</a>
+        </div>
+    </div>
+    <div class="story-portrait">
+        <img src="~/img/beto-el-numerico.jpeg" alt="Beto el Numerico saludando desde su laptop" />
+    </div>
+</section>
+
+<section class="story-section">
+    <div class="section-heading">
+        <p class="eyebrow">Contexto del proyecto</p>
+        <h2>Nosotros le ensenamos como futuros ingenieros</h2>
+        <p>
+            Como estudiantes de Ingenieria en Sistemas, tomamos el papel de guias: convertimos los temas del curso
+            en explicaciones, ejemplos y herramientas interactivas para que Beto pueda aprender sin miedo a preguntar.
+        </p>
+    </div>
+
+    <div class="story-timeline">
+        <article>
+            <span>1</span>
+            <h3>Beto conoce el problema</h3>
+            <p>
+                En bachillerato, Beto empieza a escuchar sobre funciones, aproximaciones y datos. Quiere entender
+                como la matematica puede ayudar a resolver problemas reales usando una computadora.
+            </p>
+        </article>
+        <article>
+            <span>2</span>
+            <h3>La duda se vuelve curiosidad</h3>
+            <p>
+                Al principio, palabras como derivada, error, pendiente o correlacion suenan complicadas. Pero Beto
+                descubre que cada concepto tiene un proposito y puede explicarse paso a paso.
+            </p>
+        </article>
+        <article>
+            <span>3</span>
+            <h3>Los ingenieros explican</h3>
+            <p>
+                Nosotros organizamos el aprendizaje: primero la teoria, luego un ejemplo manual y finalmente una
+                herramienta funcional para que Beto ingrese datos y observe resultados.
+            </p>
+        </article>
+        <article>
+            <span>4</span>
+            <h3>Beto practica</h3>
+            <p>
+                Con la Serie de Taylor aprende que una funcion puede aproximarse con un polinomio. Con Minimos
+                Cuadrados aprende que una recta puede resumir el comportamiento de datos experimentales.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="story-section">
+    <div class="learning-grid">
+        <article class="learning-card">
+            <h3>Lo que Beto necesita</h3>
+            <p>
+                Explicaciones claras, ejemplos pequenos, calculadoras visibles y recursos que pueda descargar para
+                practicar despues de clase.
+            </p>
+        </article>
+        <article class="learning-card">
+            <h3>Nuestro aporte</h3>
+            <p>
+                Transformamos programas y apuntes del curso en una pagina educativa con interfaz, graficas,
+                preguntas frecuentes y materiales de apoyo.
+            </p>
+        </article>
+        <article class="learning-card">
+            <h3>La meta</h3>
+            <p>
+                Que Beto entienda que aprender metodos numericos no es memorizar formulas: es usar ideas matematicas
+                para aproximar, comparar y tomar mejores decisiones.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="story-callout">
+    <div>
+        <p class="eyebrow">Mensaje final</p>
+        <h2>Aprender tambien puede ser colaborativo</h2>
+        <p>
+            Esta pagina representa ese puente: estudiantes de ingenieria compartiendo conocimiento con alguien que
+            apenas empieza, para demostrar que la tecnologia sirve mejor cuando ayuda a otros a aprender.
+        </p>
+    </div>
+    <a class="btn btn-primary" asp-action="Index">Volver al laboratorio</a>
+</section>
