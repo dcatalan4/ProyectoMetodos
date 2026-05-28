@@ -1,13 +1,13 @@
 @model ChallengeViewModel
 
 @{
-    ViewData["Title"] = "Retos numericos";
+    ViewData["Title"] = "Retos numéricos";
 }
 
 <section class="challenge-hero">
     <div class="challenge-copy">
         <p class="eyebrow">Retos de Beto</p>
-        <h1>Demuestra cuanto aprendiste de metodos numericos</h1>
+        <h1>Demuestra cuánto aprendiste de métodos numéricos</h1>
         <p>
             Ingresa un nombre respetuoso, responde el test y ayuda a Beto a desbloquear su tablero de aprendizaje.
             Al terminar, tu punteo se guarda en un archivo de texto del proyecto.
@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="challenge-avatar">
-        <img src="~/img/beto-el-numerico.jpeg" alt="Beto preparado para resolver retos numericos" />
+        <img src="~/img/beto-el-numerico.jpeg" alt="Beto preparado para resolver retos numéricos" />
     </div>
 </section>
 
@@ -70,7 +70,7 @@
     <div class="section-heading">
         <p class="eyebrow">Ranking</p>
         <h2>Mejores punteos guardados</h2>
-        <p>Estos resultados se leen desde `App_Data/scores.txt`.</p>
+      
     </div>
 
     <div class="scoreboard-wrap">
@@ -87,7 +87,7 @@
                 @if (Model.Scores.Count == 0)
                 {
                     <tr>
-                        <td colspan="4">Todavia no hay punteos guardados.</td>
+                        <td colspan="4">Todavía no hay punteos guardados.</td>
                     </tr>
                 }
                 else

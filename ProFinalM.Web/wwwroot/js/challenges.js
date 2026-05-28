@@ -7,28 +7,28 @@
 
     const questions = [
         {
-            text: "Que busca la Serie de Taylor?",
-            options: ["Aproximar funciones con polinomios", "Ordenar datos alfabeticamente", "Eliminar todos los errores", "Convertir imagenes en tablas"],
+            text: "¿Qué busca la Serie de Taylor?",
+            options: ["Aproximar funciones con polinomios", "Ordenar datos alfabéticamente", "Eliminar todos los errores", "Convertir imágenes en tablas"],
             answer: 0
         },
         {
-            text: "En Taylor, que se evalua en el punto a?",
-            options: ["Solo el resultado final", "La funcion y sus derivadas", "Unicamente la pendiente de una recta", "El nombre del usuario"],
+            text: "En Taylor, ¿qué se evalúa en el punto a?",
+            options: ["Solo el resultado final", "La función y sus derivadas", "Únicamente la pendiente de una recta", "El nombre del usuario"],
             answer: 1
         },
         {
-            text: "Que representa a1 en Minimos Cuadrados?",
+            text: "¿Qué representa a1 en Mínimos Cuadrados?",
             options: ["El intercepto", "La pendiente", "El error porcentual", "El factorial"],
             answer: 1
         },
         {
-            text: "Por que se elevan errores al cuadrado en Minimos Cuadrados?",
-            options: ["Para hacer la tabla mas larga", "Para evitar cancelaciones entre errores positivos y negativos", "Para convertir x en y", "Para dibujar la grafica"],
+            text: "¿Por qué se elevan errores al cuadrado en Mínimos Cuadrados?",
+            options: ["Para hacer la tabla más larga", "Para evitar cancelaciones entre errores positivos y negativos", "Para convertir x en y", "Para dibujar la gráfica"],
             answer: 1
         },
         {
-            text: "Que indica R cuadrado?",
-            options: ["El grado del polinomio", "La calidad del ajuste del modelo", "El numero de jugadores", "El valor de pi"],
+            text: "¿Qué indica R cuadrado?",
+            options: ["El grado del polinomio", "La calidad del ajuste del modelo", "El número de jugadores", "El valor de pi"],
             answer: 1
         }
     ];
@@ -62,12 +62,12 @@
         }
 
         if (!/^[A-Za-z0-9ÁÉÍÓÚÜÑáéíóúüñ _.-]+$/.test(clean)) {
-            return "Usa solo letras, numeros, espacios, punto, guion y guion bajo.";
+            return "Usa solo letras, números, espacios, punto, guion y guion bajo.";
         }
 
         const normalized = normalizeName(clean);
         if (bannedWords.some(word => normalized.includes(word))) {
-            return "Ese nombre no esta permitido. Usa un nombre respetuoso.";
+            return "Ese nombre no está permitido. Usa un nombre respetuoso.";
         }
 
         return "";
@@ -129,7 +129,7 @@
             answerFeedback.textContent = "Correcto. Beto avanza una casilla.";
             answerFeedback.dataset.kind = "ok";
         } else {
-            answerFeedback.textContent = "Casi. Revisa la explicacion y sigue intentando.";
+            answerFeedback.textContent = "Casi. Revisa la explicación y sigue intentando.";
             answerFeedback.dataset.kind = "warn";
         }
 
@@ -177,7 +177,7 @@
 
     function renderScores(scores) {
         if (!scores || !scores.length) {
-            scoreRows.innerHTML = '<tr><td colspan="4">Todavia no hay punteos guardados.</td></tr>';
+            scoreRows.innerHTML = '<tr><td colspan="4">Todavía no hay punteos guardados.</td></tr>';
             return;
         }
 

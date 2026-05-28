@@ -54,7 +54,7 @@ public class ChallengeScoreService
 
         if (request.Total <= 0 || request.Score < 0 || request.Score > request.Total)
         {
-            throw new InvalidOperationException("El punteo recibido no es valido.");
+            throw new InvalidOperationException("El punteo recibido no es válido.");
         }
 
         var score = new ChallengeScore

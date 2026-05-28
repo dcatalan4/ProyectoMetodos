@@ -19,5 +19,5 @@ public class SaveScoreRequest
     public string UserName { get; set; } = string.Empty;
     public int Score { get; set; }
     public int Total { get; set; }
-    public string Challenge { get; set; } = "Reto numerico";
+    public string Challenge { get; set; } = "Reto numérico";
 }

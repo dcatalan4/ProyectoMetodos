@@ -15,7 +15,7 @@ public class NumericMethodsViewModel
 
 public class TaylorInput
 {
-    [Display(Name = "Funcion f(x)")]
+    [Display(Name = "Función f(x)")]
     public string Function { get; set; } = "sin(x)";
 
     [Display(Name = "Punto de expansion a")]

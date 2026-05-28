@@ -135,7 +135,7 @@ public sealed class ExpressionMath
                 return new FunctionNode(identifier, argument);
             }
 
-            throw new InvalidOperationException("La funcion contiene un simbolo no reconocido.");
+            throw new InvalidOperationException("La función contiene un símbolo no reconocido.");
         }
 
         private ConstantNode ParseNumber()
@@ -278,7 +278,7 @@ public sealed class FunctionNode(string name, ExprNode argument) : ExprNode
             "exp" => Math.Exp(value),
             "ln" or "log" => Math.Log(value),
             "sqrt" => Math.Sqrt(value),
-            _ => throw new InvalidOperationException($"Funcion '{name}' no soportada.")
+            _ => throw new InvalidOperationException($"Función '{name}' no soportada.")
         };
     }
 
@@ -293,7 +293,7 @@ public sealed class FunctionNode(string name, ExprNode argument) : ExprNode
             "exp" => new FunctionNode("exp", argument),
             "ln" or "log" => new BinaryNode("/", new ConstantNode(1), argument),
             "sqrt" => new BinaryNode("/", new ConstantNode(1), new BinaryNode("*", new ConstantNode(2), new FunctionNode("sqrt", argument))),
-            _ => throw new InvalidOperationException($"Funcion '{name}' no soportada.")
+            _ => throw new InvalidOperationException($"Función '{name}' no soportada.")
         };
 
         return new BinaryNode("*", outer, inner);

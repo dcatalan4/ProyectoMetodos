@@ -2,17 +2,17 @@
 @model NumericMethodsViewModel
 
 @{
-    ViewData["Title"] = "Laboratorio numerico";
+    ViewData["Title"] = "Laboratorio numérico";
     var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 }
 
 <section id="inicio" class="hero-section">
     <div class="hero-copy">
-        <p class="eyebrow">Proyecto final | Metodos Numericos 2026</p>
-        <h1>Beto Numerico y el aprendizaje colaborativo</h1>
+        <p class="eyebrow">Proyecto final | Métodos Numéricos 2026</p>
+        <h1>Beto Numérico y el aprendizaje colaborativo</h1>
         <p>
-            Pagina web educativa para reunir teoria, ejemplos, programas funcionales y recursos de apoyo sobre
-            Serie de Taylor y Metodo de Minimos Cuadrados.
+            Página web educativa para reunir teoría, ejemplos, programas funcionales y recursos de apoyo sobre
+            Serie de Taylor y Método de Mínimos Cuadrados.
         </p>
         <div class="hero-actions">
             <a class="btn btn-primary" href="#taylor">Calcular Taylor</a>
@@ -22,33 +22,33 @@
         </div>
         <div class="team-strip">
             <strong>Integrantes del grupo</strong>
-            <span>Agregar nombres completos antes de la entrega final</span>
+            <span>Diego josé Catalán Ayala</span>
         </div>
     </div>
     <div class="hero-figure">
-        <img src="~/img/beto-el-numerico.jpeg" alt="Beto el Numerico" />
+        <img src="~/img/beto-el-numerico.jpeg" alt="Beto el Numérico" />
     </div>
 </section>
 
 <section class="info-band">
     <article>
-        <span>Introduccion</span>
+        <span>Introducción</span>
         <p>
-            Los metodos numericos son tecnicas matematicas utilizadas para resolver problemas complejos mediante
-            aproximaciones cuando los procedimientos algebraicos tradicionales resultan dificiles o imposibles.
+            Los métodos numéricos son técnicas matemáticas utilizadas para resolver problemas complejos mediante
+            aproximaciones cuando los procedimientos algebraicos tradicionales resultan difíciles o imposibles.
         </p>
     </article>
     <article>
-        <span>Proposito</span>
+        <span>Propósito</span>
         <p>
-            Transformar lo aprendido durante el semestre en un recurso digital interactivo, claro y util para
-            futuros estudiantes de Ingenieria en Sistemas.
+            Transformar lo aprendido durante el semestre en un recurso digital interactivo, claro y útil para
+            futuros estudiantes de Ingeniería en Sistemas.
         </p>
     </article>
     <article>
         <span>Bienvenida</span>
         <p>
-            Beto acompana el recorrido con ejemplos, calculadoras, preguntas frecuentes y materiales descargables
+            Beto acompaña el recorrido con ejemplos, calculadoras, preguntas frecuentes y materiales descargables
             para practicar paso a paso.
         </p>
     </article>
@@ -61,26 +61,26 @@
 
 <section id="taylor" class="method-section">
     <div class="section-heading">
-        <p class="eyebrow">Metodo trabajado anteriormente</p>
+        <p class="eyebrow">Método trabajado anteriormente</p>
         <h2>Serie de Taylor</h2>
         <p>
             La Serie de Taylor aproxima funciones complejas mediante polinomios construidos con derivadas
-            evaluadas en un punto especifico.
+            evaluadas en un punto específico.
         </p>
     </div>
 
     <div class="content-grid">
         <article class="content-card">
-            <h3>Para que sirve</h3>
+            <h3>Para qué sirve</h3>
             <p>
-                Sirve para aproximar funciones, resolver operaciones dificiles, realizar simulaciones, apoyar
-                calculos cientificos y representar funciones complicadas con polinomios mas faciles de analizar.
+                Sirve para aproximar funciones, resolver operaciones difíciles, realizar simulaciones, apoyar
+                cálculos científicos y representar funciones complicadas con polinomios más fáciles de analizar.
             </p>
         </article>
         <article class="content-card">
-            <h3>Ejemplo basico</h3>
+            <h3>Ejemplo básico</h3>
             <p>
-                Para aproximar f(1.2) con f(x)=x^2 se toma a=1, se deriva f'(x)=2x, se evalua f(1)=1 y
+                Para aproximar f(1.2) con f(x)=x^2 se toma a=1, se deriva f'(x)=2x, se evalúa f(1)=1 y
                 f'(1)=2, y se obtiene f(1.2) aproximado 1 + 2(0.2) = 1.4.
             </p>
         </article>
@@ -94,14 +94,14 @@ valorAproximado = double(subs(T, x, xi_1));</code></pre>
 
     <div class="video-panel">
         <div>
-            <span>Video corto del metodo previo</span>
+            <span>Video corto del método previo</span>
             <p>Espacio preparado para pegar el enlace del video donde el grupo explica el programa de Taylor.</p>
         </div>
-        <a class="btn btn-outline-dark" href="#recursos">Ver codigo fuente</a>
+        <a class="btn btn-outline-dark" href="#recursos">Ver código fuente</a>
     </div>
 
     <div class="workspace-grid">
-        <form class="tool-panel" asp-action="Index" method="post">
+        <form class="tool-panel" asp-action="Index" asp-fragment="taylor" method="post">
             <input type="hidden" name="method" value="taylor" />
             <div class="mb-3">
                 <label asp-for="Taylor.Function" class="form-label"></label>
@@ -137,7 +137,7 @@ valorAproximado = double(subs(T, x, xi_1));</code></pre>
                     <span>Polinomio</span>
                     <code>@Model.TaylorResult.Polynomial</code>
                 </div>
-                <canvas id="taylorChart" class="chart-canvas" aria-label="Grafica de Taylor"></canvas>
+                <canvas id="taylorChart" class="chart-canvas" aria-label="Gráfica de Taylor"></canvas>
             </div>
         }
     </div>
@@ -172,10 +172,10 @@ valorAproximado = double(subs(T, x, xi_1));</code></pre>
 
 <section id="minimos" class="method-section">
     <div class="section-heading">
-        <p class="eyebrow">Desarrollo del metodo nuevo</p>
-        <h2>Metodo de Minimos Cuadrados</h2>
+        <p class="eyebrow">Desarrollo del método nuevo</p>
+        <h2>Método de Mínimos Cuadrados</h2>
         <p>
-            Este metodo ajusta una recta a datos experimentales para representar su tendencia general minimizando
+            Este método ajusta una recta a datos experimentales para representar su tendencia general minimizando
             los errores entre los valores reales y los estimados.
         </p>
     </div>
@@ -184,7 +184,7 @@ valorAproximado = double(subs(T, x, xi_1));</code></pre>
         <article class="content-card">
             <h3>Aplicaciones</h3>
             <p>
-                Se usa en economia, ingenieria, estadistica, analisis de datos e inteligencia artificial para
+                Se usa en economía, ingeniería, estadística, análisis de datos e inteligencia artificial para
                 estudiar relaciones entre variables y hacer predicciones aproximadas.
             </p>
         </article>
@@ -194,7 +194,7 @@ valorAproximado = double(subs(T, x, xi_1));</code></pre>
                 <li>Ingresar los pares de datos x,y.</li>
                 <li>Calcular x*y, x^2, y^2 y sus sumatorias.</li>
                 <li>Calcular pendiente a1 e intercepto a0.</li>
-                <li>Construir la ecuacion y = a0 + a1x.</li>
+                <li>Construir la ecuación y = a0 + a1x.</li>
                 <li>Evaluar r y R^2 para medir el ajuste.</li>
             </ol>
         </article>
@@ -214,14 +214,14 @@ a0 = ((sumY * sumX2) - (sumX * sumXY)) / ((m * sumX2) - (sumX^2));</code></pre>
 
     <div class="video-panel">
         <div>
-            <span>Video corto del metodo nuevo</span>
-            <p>Espacio preparado para pegar el enlace del video donde el grupo explica la app de Minimos Cuadrados.</p>
+            <span>Video corto del método nuevo</span>
+            <p>Espacio preparado para pegar el enlace del video donde el grupo explica la app de Mínimos Cuadrados.</p>
         </div>
         <a class="btn btn-outline-dark" href="#recursos">Descargar MATLAB</a>
     </div>
 
     <div class="workspace-grid">
-        <form class="tool-panel" asp-action="Index" method="post">
+        <form class="tool-panel" asp-action="Index" asp-fragment="minimos" method="post">
             <input type="hidden" name="method" value="leastSquares" />
             <label asp-for="LeastSquares.Points" class="form-label"></label>
             <textarea asp-for="LeastSquares.Points" class="form-control data-input" spellcheck="false"></textarea>
@@ -234,14 +234,14 @@ a0 = ((sumY * sumX2) - (sumX * sumXY)) / ((m * sumX2) - (sumX^2));</code></pre>
                 <div class="metric-grid">
                     <div><span>Pendiente a1</span><strong>@Model.LeastSquaresResult.Slope.ToString("0.######")</strong></div>
                     <div><span>Intercepto a0</span><strong>@Model.LeastSquaresResult.Intercept.ToString("0.######")</strong></div>
-                    <div><span>Correlacion r</span><strong>@Model.LeastSquaresResult.Correlation.ToString("0.######")</strong></div>
+                    <div><span>Correlación r</span><strong>@Model.LeastSquaresResult.Correlation.ToString("0.######")</strong></div>
                     <div><span>R cuadrado</span><strong>@Model.LeastSquaresResult.Determination.ToString("0.######")</strong></div>
                 </div>
                 <div class="formula-box">
-                    <span>Ecuacion de ajuste</span>
+                    <span>Ecuación de ajuste</span>
                     <code>y = @Model.LeastSquaresResult.Slope.ToString("0.####")x + @Model.LeastSquaresResult.Intercept.ToString("0.####")</code>
                 </div>
-                <canvas id="leastSquaresChart" class="chart-canvas" aria-label="Grafica de minimos cuadrados"></canvas>
+                <canvas id="leastSquaresChart" class="chart-canvas" aria-label="Gráfica de mínimos cuadrados"></canvas>
             </div>
         }
     </div>
@@ -294,24 +294,24 @@ a0 = ((sumY * sumX2) - (sumX * sumXY)) / ((m * sumX2) - (sumX^2));</code></pre>
 
     <div class="faq-grid">
         <details open>
-            <summary>En Taylor, donde se coloca x=1 y donde x=1.2?</summary>
-            <p>El punto cercano, por ejemplo a=1, se usa para evaluar la funcion y sus derivadas. El valor 1.2 es el punto que se desea aproximar.</p>
+            <summary>En Taylor, ¿dónde se coloca x=1 y dónde x=1.2?</summary>
+            <p>El punto cercano, por ejemplo a=1, se usa para evaluar la función y sus derivadas. El valor 1.2 es el punto que se desea aproximar.</p>
         </details>
         <details>
-            <summary>Se deriva antes o despues de evaluar?</summary>
-            <p>Primero se derivan las funciones necesarias y despues se evaluan en el punto de expansion a.</p>
+            <summary>¿Se deriva antes o después de evaluar?</summary>
+            <p>Primero se derivan las funciones necesarias y después se evalúan en el punto de expansión a.</p>
         </details>
         <details>
-            <summary>Como se interpreta el error aproximado?</summary>
-            <p>El error compara el valor real con el valor aproximado. Al usar mas terminos de Taylor, normalmente la diferencia disminuye.</p>
+            <summary>¿Cómo se interpreta el error aproximado?</summary>
+            <p>El error compara el valor real con el valor aproximado. Al usar más términos de Taylor, normalmente la diferencia disminuye.</p>
         </details>
         <details>
-            <summary>Por que en minimos cuadrados se elevan errores al cuadrado?</summary>
-            <p>Para evitar que errores positivos y negativos se cancelen entre si y para penalizar con mas fuerza las desviaciones grandes.</p>
+            <summary>¿Por qué en mínimos cuadrados se elevan errores al cuadrado?</summary>
+            <p>Para evitar que errores positivos y negativos se cancelen entre sí y para penalizar con más fuerza las desviaciones grandes.</p>
         </details>
         <details>
-            <summary>Que significan a0 y a1 en la recta?</summary>
-            <p>a0 es el intercepto, el valor estimado cuando x es cero. a1 es la pendiente, que indica cuanto cambia y cuando x aumenta una unidad.</p>
+            <summary>¿Qué significan a0 y a1 en la recta?</summary>
+            <p>a0 es el intercepto, el valor estimado cuando x es cero. a1 es la pendiente, que indica cuánto cambia y cuando x aumenta una unidad.</p>
         </details>
     </div>
 </section>
@@ -330,15 +330,15 @@ a0 = ((sumY * sumX2) - (sumX * sumXY)) / ((m * sumX2) - (sumX^2));</code></pre>
         </a>
         <a class="resource-card" href="https://drive.google.com/file/d/1xR0qHh4-d1JPhdmtPzFQp2TqgcMhJi9v/view?usp=drive_link" target="_blank" rel="noopener">
             <span>MATLAB App Designer</span>
-            <strong>App Minimos (.mlapp)</strong>
+            <strong>App Mínimos (.mlapp)</strong>
         </a>
         <a class="resource-card" href="https://drive.google.com/file/d/1urz6tLwJVV61zqRb1VK5__0O0S06z7sD/view?usp=drive_link" target="_blank" rel="noopener">
-            <span>Codigo fuente</span>
+            <span>Código fuente</span>
             <strong>Taylor interactivo (.m)</strong>
         </a>
         <a class="resource-card" href="https://drive.google.com/file/d/17agvIerFhAQ4k2qsQ2QrfcZ1WjXJ8UvO/view?usp=drive_link" target="_blank" rel="noopener">
-            <span>Codigo fuente</span>
-            <strong>Minimos Cuadrados (.m)</strong>
+            <span>Código fuente</span>
+            <strong>Mínimos Cuadrados (.m)</strong>
         </a>
         <a class="resource-card" href="https://drive.google.com/file/d/1E_pHbG00HCe0VUzBa_d6foBgjkOwSoTg/view?usp=drive_link" target="_blank" rel="noopener">
             <span>Documento de apoyo</span>
@@ -346,7 +346,7 @@ a0 = ((sumY * sumX2) - (sumX * sumXY)) / ((m * sumX2) - (sumX^2));</code></pre>
         </a>
         <a class="resource-card" href="https://drive.google.com/file/d/1vVUglLzBunByF3lPkadqXUVAFwB-ZOYV/view?usp=drive_link" target="_blank" rel="noopener">
             <span>Documento de apoyo</span>
-            <strong>Manual Minimos PDF</strong>
+            <strong>Manual Mínimos PDF</strong>
         </a>
         <a class="resource-card" href="~/downloads/METODOS NUMERICOS.docx" download>
             <span>Ejemplos resueltos</span>
@@ -366,20 +366,20 @@ a0 = ((sumY * sumX2) - (sumX * sumXY)) / ((m * sumX2) - (sumX^2));</code></pre>
     </div>
     <div class="content-grid">
         <article class="content-card">
-            <h3>Que aprendimos</h3>
-            <p>Los metodos numericos permiten convertir problemas matematicos en procesos aproximados, medibles y programables.</p>
+            <h3>Qué aprendimos</h3>
+            <p>Los métodos numéricos permiten convertir problemas matemáticos en procesos aproximados, medibles y programables.</p>
         </article>
         <article class="content-card">
             <h3>Dificultades</h3>
-            <p>Lo mas retador fue explicar con claridad las derivadas, los errores y el significado de los coeficientes del ajuste lineal.</p>
+            <p>Lo más retador fue explicar con claridad las derivadas, los errores y el significado de los coeficientes del ajuste lineal.</p>
         </article>
         <article class="content-card">
             <h3>Apoyo de IA</h3>
-            <p>La inteligencia artificial ayudo a organizar contenido, adaptar codigo y convertir los programas en una pagina mas facil de usar.</p>
+            <p>La inteligencia artificial ayudó a organizar contenido, adaptar código y convertir los programas en una página más fácil de usar.</p>
         </article>
         <article class="content-card">
             <h3>Importancia</h3>
-            <p>En Ingenieria en Sistemas, estos metodos ayudan a analizar datos, simular comportamientos y construir herramientas predictivas.</p>
+            <p>En Ingeniería en Sistemas, estos métodos ayudan a analizar datos, simular comportamientos y construir herramientas predictivas.</p>
         </article>
     </div>
 </section>
