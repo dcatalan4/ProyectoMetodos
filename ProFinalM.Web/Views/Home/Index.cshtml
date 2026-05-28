@@ -1,0 +1,401 @@
+@using System.Text.Json
+@model NumericMethodsViewModel
+
+@{
+    ViewData["Title"] = "Laboratorio numerico";
+    var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+}
+
+<section id="inicio" class="hero-section">
+    <div class="hero-copy">
+        <p class="eyebrow">Proyecto final | Metodos Numericos 2026</p>
+        <h1>Beto Numerico y el aprendizaje colaborativo</h1>
+        <p>
+            Pagina web educativa para reunir teoria, ejemplos, programas funcionales y recursos de apoyo sobre
+            Serie de Taylor y Metodo de Minimos Cuadrados.
+        </p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="#taylor">Calcular Taylor</a>
+            <a class="btn btn-outline-dark" href="#minimos">Ajustar datos</a>
+        </div>
+        <div class="team-strip">
+            <strong>Integrantes del grupo</strong>
+            <span>Agregar nombres completos antes de la entrega final</span>
+        </div>
+    </div>
+    <div class="hero-figure">
+        <img src="~/img/beto-el-numerico.jpeg" alt="Beto el Numerico" />
+    </div>
+</section>
+
+<section class="info-band">
+    <article>
+        <span>Introduccion</span>
+        <p>
+            Los metodos numericos son tecnicas matematicas utilizadas para resolver problemas complejos mediante
+            aproximaciones cuando los procedimientos algebraicos tradicionales resultan dificiles o imposibles.
+        </p>
+    </article>
+    <article>
+        <span>Proposito</span>
+        <p>
+            Transformar lo aprendido durante el semestre en un recurso digital interactivo, claro y util para
+            futuros estudiantes de Ingenieria en Sistemas.
+        </p>
+    </article>
+    <article>
+        <span>Bienvenida</span>
+        <p>
+            Beto acompana el recorrido con ejemplos, calculadoras, preguntas frecuentes y materiales descargables
+            para practicar paso a paso.
+        </p>
+    </article>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <div class="alert alert-warning app-alert" role="alert">@Model.ErrorMessage</div>
+}
+
+<section id="taylor" class="method-section">
+    <div class="section-heading">
+        <p class="eyebrow">Metodo trabajado anteriormente</p>
+        <h2>Serie de Taylor</h2>
+        <p>
+            La Serie de Taylor aproxima funciones complejas mediante polinomios construidos con derivadas
+            evaluadas en un punto especifico.
+        </p>
+    </div>
+
+    <div class="content-grid">
+        <article class="content-card">
+            <h3>Para que sirve</h3>
+            <p>
+                Sirve para aproximar funciones, resolver operaciones dificiles, realizar simulaciones, apoyar
+                calculos cientificos y representar funciones complicadas con polinomios mas faciles de analizar.
+            </p>
+        </article>
+        <article class="content-card">
+            <h3>Ejemplo basico</h3>
+            <p>
+                Para aproximar f(1.2) con f(x)=x^2 se toma a=1, se deriva f'(x)=2x, se evalua f(1)=1 y
+                f'(1)=2, y se obtiene f(1.2) aproximado 1 + 2(0.2) = 1.4.
+            </p>
+        </article>
+        <article class="content-card">
+            <h3>Fragmento del programa</h3>
+            <pre><code>f = str2sym(fStr);
+T = taylor(f, x, 'ExpansionPoint', a, 'Order', n+1);
+valorAproximado = double(subs(T, x, xi_1));</code></pre>
+        </article>
+    </div>
+
+    <div class="video-panel">
+        <div>
+            <span>Video corto del metodo previo</span>
+            <p>Espacio preparado para pegar el enlace del video donde el grupo explica el programa de Taylor.</p>
+        </div>
+        <a class="btn btn-outline-dark" href="#recursos">Ver codigo fuente</a>
+    </div>
+
+    <div class="workspace-grid">
+        <form class="tool-panel" asp-action="Index" method="post">
+            <input type="hidden" name="method" value="taylor" />
+            <div class="mb-3">
+                <label asp-for="Taylor.Function" class="form-label"></label>
+                <input asp-for="Taylor.Function" class="form-control" placeholder="sin(x), exp(x), x^2 + 3*x" />
+            </div>
+            <div class="input-row">
+                <div>
+                    <label asp-for="Taylor.ExpansionPoint" class="form-label"></label>
+                    <input asp-for="Taylor.ExpansionPoint" class="form-control" />
+                </div>
+                <div>
+                    <label asp-for="Taylor.Order" class="form-label"></label>
+                    <input asp-for="Taylor.Order" class="form-control" min="0" max="10" />
+                </div>
+                <div>
+                    <label asp-for="Taylor.Step" class="form-label"></label>
+                    <input asp-for="Taylor.Step" class="form-control" />
+                </div>
+            </div>
+            <button class="btn btn-primary w-100 mt-3" type="submit">Calcular serie</button>
+        </form>
+
+        @if (Model.TaylorResult is not null)
+        {
+            <div class="result-panel">
+                <div class="metric-grid">
+                    <div><span>Valor real</span><strong>@Model.TaylorResult.RealValue.ToString("0.######")</strong></div>
+                    <div><span>Aproximado</span><strong>@Model.TaylorResult.ApproximateValue.ToString("0.######")</strong></div>
+                    <div><span>Error absoluto</span><strong>@Model.TaylorResult.AbsoluteError.ToString("0.######")</strong></div>
+                    <div><span>Error porcentual</span><strong>@Model.TaylorResult.PercentageError.ToString("0.####")%</strong></div>
+                </div>
+                <div class="formula-box">
+                    <span>Polinomio</span>
+                    <code>@Model.TaylorResult.Polynomial</code>
+                </div>
+                <canvas id="taylorChart" class="chart-canvas" aria-label="Grafica de Taylor"></canvas>
+            </div>
+        }
+    </div>
+
+    @if (Model.TaylorResult is not null)
+    {
+        <div class="table-wrap">
+            <table class="table app-table">
+                <thead>
+                    <tr>
+                        <th>Orden</th>
+                        <th>Derivada</th>
+                        <th>f^(k)(a)</th>
+                        <th>Coeficiente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var term in Model.TaylorResult.Terms)
+                    {
+                        <tr>
+                            <td>@term.Order</td>
+                            <td><code>@term.Derivative</code></td>
+                            <td>@term.DerivativeAtA.ToString("0.######")</td>
+                            <td>@term.Coefficient.ToString("0.######")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>
+
+<section id="minimos" class="method-section">
+    <div class="section-heading">
+        <p class="eyebrow">Desarrollo del metodo nuevo</p>
+        <h2>Metodo de Minimos Cuadrados</h2>
+        <p>
+            Este metodo ajusta una recta a datos experimentales para representar su tendencia general minimizando
+            los errores entre los valores reales y los estimados.
+        </p>
+    </div>
+
+    <div class="content-grid">
+        <article class="content-card">
+            <h3>Aplicaciones</h3>
+            <p>
+                Se usa en economia, ingenieria, estadistica, analisis de datos e inteligencia artificial para
+                estudiar relaciones entre variables y hacer predicciones aproximadas.
+            </p>
+        </article>
+        <article class="content-card">
+            <h3>Procedimiento paso a paso</h3>
+            <ol>
+                <li>Ingresar los pares de datos x,y.</li>
+                <li>Calcular x*y, x^2, y^2 y sus sumatorias.</li>
+                <li>Calcular pendiente a1 e intercepto a0.</li>
+                <li>Construir la ecuacion y = a0 + a1x.</li>
+                <li>Evaluar r y R^2 para medir el ajuste.</li>
+            </ol>
+        </article>
+        <article class="content-card">
+            <h3>Ejemplo manual resuelto</h3>
+            <p>
+                Con los datos (1,60), (2,65), (3,70), (4,80), se obtiene suma x=10, suma y=275,
+                suma xy=720 y suma x^2=30. La recta final es y = 52.5 + 6.5x.
+            </p>
+        </article>
+        <article class="content-card">
+            <h3>Fragmento del programa</h3>
+            <pre><code>a1 = ((m * sumXY) - (sumX * sumY)) / ((m * sumX2) - (sumX^2));
+a0 = ((sumY * sumX2) - (sumX * sumXY)) / ((m * sumX2) - (sumX^2));</code></pre>
+        </article>
+    </div>
+
+    <div class="video-panel">
+        <div>
+            <span>Video corto del metodo nuevo</span>
+            <p>Espacio preparado para pegar el enlace del video donde el grupo explica la app de Minimos Cuadrados.</p>
+        </div>
+        <a class="btn btn-outline-dark" href="#recursos">Descargar MATLAB</a>
+    </div>
+
+    <div class="workspace-grid">
+        <form class="tool-panel" asp-action="Index" method="post">
+            <input type="hidden" name="method" value="leastSquares" />
+            <label asp-for="LeastSquares.Points" class="form-label"></label>
+            <textarea asp-for="LeastSquares.Points" class="form-control data-input" spellcheck="false"></textarea>
+            <button class="btn btn-primary w-100 mt-3" type="submit">Ajustar recta</button>
+        </form>
+
+        @if (Model.LeastSquaresResult is not null)
+        {
+            <div class="result-panel">
+                <div class="metric-grid">
+                    <div><span>Pendiente a1</span><strong>@Model.LeastSquaresResult.Slope.ToString("0.######")</strong></div>
+                    <div><span>Intercepto a0</span><strong>@Model.LeastSquaresResult.Intercept.ToString("0.######")</strong></div>
+                    <div><span>Correlacion r</span><strong>@Model.LeastSquaresResult.Correlation.ToString("0.######")</strong></div>
+                    <div><span>R cuadrado</span><strong>@Model.LeastSquaresResult.Determination.ToString("0.######")</strong></div>
+                </div>
+                <div class="formula-box">
+                    <span>Ecuacion de ajuste</span>
+                    <code>y = @Model.LeastSquaresResult.Slope.ToString("0.####")x + @Model.LeastSquaresResult.Intercept.ToString("0.####")</code>
+                </div>
+                <canvas id="leastSquaresChart" class="chart-canvas" aria-label="Grafica de minimos cuadrados"></canvas>
+            </div>
+        }
+    </div>
+
+    @if (Model.LeastSquaresResult is not null)
+    {
+        <div class="table-wrap">
+            <table class="table app-table">
+                <thead>
+                    <tr>
+                        <th>x</th>
+                        <th>y</th>
+                        <th>xy</th>
+                        <th>x^2</th>
+                        <th>y^2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var point in Model.LeastSquaresResult.Points)
+                    {
+                        <tr>
+                            <td>@point.X.ToString("0.####")</td>
+                            <td>@point.Y.ToString("0.####")</td>
+                            <td>@point.XY.ToString("0.####")</td>
+                            <td>@point.X2.ToString("0.####")</td>
+                            <td>@point.Y2.ToString("0.####")</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>@Model.LeastSquaresResult.SumX.ToString("0.####")</th>
+                        <th>@Model.LeastSquaresResult.SumY.ToString("0.####")</th>
+                        <th>@Model.LeastSquaresResult.SumXY.ToString("0.####")</th>
+                        <th>@Model.LeastSquaresResult.SumX2.ToString("0.####")</th>
+                        <th>@Model.LeastSquaresResult.SumY2.ToString("0.####")</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    }
+</section>
+
+<section id="faq" class="method-section">
+    <div class="section-heading">
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h2>Dudas reales del aprendizaje</h2>
+        <p>Respuestas pensadas para futuros estudiantes que se enfrenten a los mismos bloqueos.</p>
+    </div>
+
+    <div class="faq-grid">
+        <details open>
+            <summary>En Taylor, donde se coloca x=1 y donde x=1.2?</summary>
+            <p>El punto cercano, por ejemplo a=1, se usa para evaluar la funcion y sus derivadas. El valor 1.2 es el punto que se desea aproximar.</p>
+        </details>
+        <details>
+            <summary>Se deriva antes o despues de evaluar?</summary>
+            <p>Primero se derivan las funciones necesarias y despues se evaluan en el punto de expansion a.</p>
+        </details>
+        <details>
+            <summary>Como se interpreta el error aproximado?</summary>
+            <p>El error compara el valor real con el valor aproximado. Al usar mas terminos de Taylor, normalmente la diferencia disminuye.</p>
+        </details>
+        <details>
+            <summary>Por que en minimos cuadrados se elevan errores al cuadrado?</summary>
+            <p>Para evitar que errores positivos y negativos se cancelen entre si y para penalizar con mas fuerza las desviaciones grandes.</p>
+        </details>
+        <details>
+            <summary>Que significan a0 y a1 en la recta?</summary>
+            <p>a0 es el intercepto, el valor estimado cuando x es cero. a1 es la pendiente, que indica cuanto cambia y cuando x aumenta una unidad.</p>
+        </details>
+    </div>
+</section>
+
+<section id="recursos" class="method-section">
+    <div class="section-heading">
+        <p class="eyebrow">Recursos descargables</p>
+        <h2>Material de apoyo</h2>
+        <p>Archivos fuente, manuales y documentos para complementar el aprendizaje y cumplir la entrega final.</p>
+    </div>
+
+    <div class="resource-grid">
+        <a class="resource-card" href="https://drive.google.com/file/d/1KIc4HxcPnjm94cZExgBsfWK1xoCfNHBT/view?usp=drive_link" target="_blank" rel="noopener">
+            <span>MATLAB App Designer</span>
+            <strong>App Taylor (.mlapp)</strong>
+        </a>
+        <a class="resource-card" href="https://drive.google.com/file/d/1xR0qHh4-d1JPhdmtPzFQp2TqgcMhJi9v/view?usp=drive_link" target="_blank" rel="noopener">
+            <span>MATLAB App Designer</span>
+            <strong>App Minimos (.mlapp)</strong>
+        </a>
+        <a class="resource-card" href="https://drive.google.com/file/d/1urz6tLwJVV61zqRb1VK5__0O0S06z7sD/view?usp=drive_link" target="_blank" rel="noopener">
+            <span>Codigo fuente</span>
+            <strong>Taylor interactivo (.m)</strong>
+        </a>
+        <a class="resource-card" href="https://drive.google.com/file/d/17agvIerFhAQ4k2qsQ2QrfcZ1WjXJ8UvO/view?usp=drive_link" target="_blank" rel="noopener">
+            <span>Codigo fuente</span>
+            <strong>Minimos Cuadrados (.m)</strong>
+        </a>
+        <a class="resource-card" href="https://drive.google.com/file/d/1E_pHbG00HCe0VUzBa_d6foBgjkOwSoTg/view?usp=drive_link" target="_blank" rel="noopener">
+            <span>Documento de apoyo</span>
+            <strong>Manual Taylor PDF</strong>
+        </a>
+        <a class="resource-card" href="https://drive.google.com/file/d/1vVUglLzBunByF3lPkadqXUVAFwB-ZOYV/view?usp=drive_link" target="_blank" rel="noopener">
+            <span>Documento de apoyo</span>
+            <strong>Manual Minimos PDF</strong>
+        </a>
+        <a class="resource-card" href="~/downloads/METODOS NUMERICOS.docx" download>
+            <span>Ejemplos resueltos</span>
+            <strong>Documento del curso</strong>
+        </a>
+        <a class="resource-card" href="~/downloads/ProFinalM.zip" download>
+            <span>Proyecto base</span>
+            <strong>Fuentes comprimidas</strong>
+        </a>
+    </div>
+</section>
+
+<section id="conclusiones" class="method-section conclusions-section">
+    <div class="section-heading">
+        <p class="eyebrow">Conclusiones</p>
+        <h2>Aprendizajes del proyecto</h2>
+    </div>
+    <div class="content-grid">
+        <article class="content-card">
+            <h3>Que aprendimos</h3>
+            <p>Los metodos numericos permiten convertir problemas matematicos en procesos aproximados, medibles y programables.</p>
+        </article>
+        <article class="content-card">
+            <h3>Dificultades</h3>
+            <p>Lo mas retador fue explicar con claridad las derivadas, los errores y el significado de los coeficientes del ajuste lineal.</p>
+        </article>
+        <article class="content-card">
+            <h3>Apoyo de IA</h3>
+            <p>La inteligencia artificial ayudo a organizar contenido, adaptar codigo y convertir los programas en una pagina mas facil de usar.</p>
+        </article>
+        <article class="content-card">
+            <h3>Importancia</h3>
+            <p>En Ingenieria en Sistemas, estos metodos ayudan a analizar datos, simular comportamientos y construir herramientas predictivas.</p>
+        </article>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        window.numericData = {
+            taylor: @Html.Raw(JsonSerializer.Serialize(new
+            {
+                real = Model.TaylorResult?.RealCurve,
+                approx = Model.TaylorResult?.TaylorCurve
+            }, jsonOptions)),
+            leastSquares: @Html.Raw(JsonSerializer.Serialize(new
+            {
+                points = Model.LeastSquaresResult?.Points,
+                line = Model.LeastSquaresResult?.Line
+            }, jsonOptions))
+        };
+    </script>
+    <script src="~/js/charts.js" asp-append-version="true"></script>
+}
